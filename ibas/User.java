@@ -1,5 +1,11 @@
 package ibas;
 
+/*
+This class is defining the Users information, username, password, and security
+question information.
+
+Contains gets and sets of each username that are used elsewhere in the program.
+*/
 public class User {
 	private String username;
 	private String password;
