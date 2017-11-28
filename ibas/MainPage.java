@@ -3,6 +3,8 @@ package ibas;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /*
 MainPage is the method where the user has successfully logged in and is accessing
@@ -39,6 +41,18 @@ public class MainPage extends JFrame {
 
 		add(panel, BorderLayout.CENTER);
 		setTitle("Main Page");
+                
+                interestRateButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        InterestRateCalculator calculator = new InterestRateCalculator();
+				calculator.setSize(400, 400);
+				calculator.setVisible(true);
+				//panel.setVisible(false);                        
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });
+                
 
 	}
 }
