@@ -53,6 +53,17 @@ public class MainPage extends JFrame {
                     }
                 });
                 
+                accountBalanceButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        AccountBalance balancePage = new AccountBalance();
+				balancePage.setSize(400, 400);
+				balancePage.setVisible(true);
+				//panel.setVisible(false);                        
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });                
+                
 
 	}
 }
