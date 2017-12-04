@@ -62,7 +62,18 @@ public class MainPage extends JFrame {
 				//panel.setVisible(false);                        
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                });                
+                });   
+                
+                createLoginButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        CreateLogin updateLoginInfo = new CreateLogin();
+				updateLoginInfo.setSize(600, 400);
+				updateLoginInfo.setVisible(true);
+				//panel.setVisible(false);                        
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });                    
                 
 
 	}
