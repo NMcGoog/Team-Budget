@@ -73,7 +73,18 @@ public class MainPage extends JFrame {
 				//panel.setVisible(false);                        
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                });                    
+                });      
+                
+                directDepositButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        DirectDeposit depositInfo = new DirectDeposit();
+				depositInfo.setSize(400, 400);
+				depositInfo.setVisible(true);
+				//panel.setVisible(false);                        
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });                     
                 
 
 	}
