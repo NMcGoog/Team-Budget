@@ -51,8 +51,10 @@ public class DirectDeposit extends JFrame {
         
         JLabel recurringDateLabel = new JLabel("Recurring Date: ");
         JTextField recurringDateField = new JTextField();
-
-
+        
+        JLabel blankLabel4 = new JLabel("");
+        JButton submitButton = new JButton("Submit");
+        
         panel.add(helloLabel);
         panel.add(blankLabel);  
         panel.add(accountLabel);
@@ -66,7 +68,11 @@ public class DirectDeposit extends JFrame {
         panel.add(oneTimeRadioButton);
         panel.add(recurringRadioButton);  
         panel.add(recurringDateLabel);
-        panel.add(recurringDateField);        
+        panel.add(recurringDateField); 
+        panel.add(blankLabel4);
+        panel.add(submitButton);         
+        
+        
         
 
 
