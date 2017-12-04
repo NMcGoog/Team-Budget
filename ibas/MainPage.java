@@ -84,7 +84,18 @@ public class MainPage extends JFrame {
 				//panel.setVisible(false);                        
                         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                     }
-                });                     
+                });        
+                
+                billPaymentButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        BillPayment billingInfo = new BillPayment();
+				billingInfo.setSize(400, 400);
+				billingInfo.setVisible(true);
+				//panel.setVisible(false);                        
+                        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                    }
+                });                      
                 
 
 	}
