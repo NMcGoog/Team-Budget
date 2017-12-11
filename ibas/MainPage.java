@@ -1,15 +1,22 @@
 package ibas;
 
+// Imports
 import javax.swing.*;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
-MainPage is the method where the user has successfully logged in and is accessing
-the function of ibas.
+/**
+* Team Budget: Greg Holden, Raymond Hames, Nicholas McGoogan, Michael Lopez, 
+Joshua Kennedy, Jonathan Davies
+* Professor: David Castillo
+* Course: CMSC 495 7982
+* MainPage.java: The "MainPage" class is the method where the user has 
+successfully logged in and is accessing the function of ibas. It adds JFrame 
+components to JPanel that allow the customer to choose between interest rate
+calculator, account balance, create login, direct deposit, and bill payment.
 */
+
 
 public class MainPage extends JFrame {
 	JPanel panel;
@@ -24,8 +31,12 @@ public class MainPage extends JFrame {
 
 	public MainPage() {
 
+                // Initialize JPanel with 4 rows and 4 columns
 		panel = new JPanel(new GridLayout(4, 4));
 
+                // Initialize JButtons for Interest rate calculator, 
+                // overall account balance, create login, direct 
+                // deposit information, and bill payment information
 		interestRateButton = new JButton("Interest Rate Calculator");
 		accountBalanceButton = new JButton("Overall Account Balance");
 		createLoginButton = new JButton("Create Login");
@@ -33,15 +44,22 @@ public class MainPage extends JFrame {
 		billPaymentButton = new JButton("Bill Payment Information");
 
 
-		panel.add(interestRateButton);
+                // Add JButtons to panel for Interest rate calculator, 
+                // overall account balance, create login, direct 
+                // deposit information, and bill payment information		
+                panel.add(interestRateButton);
 		panel.add(accountBalanceButton);
 		panel.add(createLoginButton);
 		panel.add(directDepositButton);
 		panel.add(billPaymentButton);
 
+                // Add panel to JFrame
 		add(panel, BorderLayout.CENTER);
+                // Set title of panel as "Main Page"
 		setTitle("Main Page");
                 
+                // Add action listener to interest rate calculator button
+                // Set size and visibility
                 interestRateButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -53,6 +71,8 @@ public class MainPage extends JFrame {
                     }
                 });
                 
+                // Add action listener to account balance button
+                // Set size and visibility
                 accountBalanceButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -64,6 +84,8 @@ public class MainPage extends JFrame {
                     }
                 });   
                 
+                // Add action listener to create login button
+                // Set size and visibility
                 createLoginButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -75,6 +97,8 @@ public class MainPage extends JFrame {
                     }
                 });      
                 
+                // Add action listener to direct deposit button
+                // Set size and visibility
                 directDepositButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -86,6 +110,8 @@ public class MainPage extends JFrame {
                     }
                 });        
                 
+                    // Add action listener to bill payment button
+                    // Set size and visibility                
                 billPaymentButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {

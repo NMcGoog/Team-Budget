@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ibas;
-
+ 
 /**
- *
- * @author Nick
- */
+* Team Budget: Greg Holden, Raymond Hames, Nicholas McGoogan, Michael Lopez, 
+Joshua Kennedy, Jonathan Davies
+* Professor: David Castillo
+* Course: CMSC 495 7982
+* DirectDeposit.java: The "DirectDeposit" class adds JFrame components to JPanel that
+allows the customer to select savings/checking account for deposit, frequency 
+of deposit, and the recurring date of deposit.
+*/
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,7 +31,6 @@ public class AccountBalance extends JFrame {
         
         JLabel savingsLabel = new JLabel("Savings Balance: ");
         JTextField savingsTextField = new JTextField();
-        
 
         panel.add(helloLabel);
         panel.add(blankLabel);
@@ -39,11 +38,7 @@ public class AccountBalance extends JFrame {
         panel.add(checkingTextField);
         panel.add(savingsLabel);
         panel.add(savingsTextField);        
-        
-        
-        
-        
-        
+
         
         add(panel, BorderLayout.CENTER);
         setTitle("Account Balance");
