@@ -83,9 +83,10 @@ class Login extends JFrame implements ActionListener {
         /*
         This is where the users credentials are checked against the database
         */
+        @Override
 	public void actionPerformed(ActionEvent ae) {
-		String value1 = usernameText.getText();
-		String value2 = passwordText.getText();
+		String value1 = SecurityUtil.sanitize(usernameText.getText());
+		String value2 = SecurityUtil.sanitize(passwordText.getText());
 		/**
 		 * Username:abc Password:abc Because no connection to database or any
 		 * files. so this is just a static application.

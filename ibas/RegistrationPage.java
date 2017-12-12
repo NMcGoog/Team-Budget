@@ -92,8 +92,8 @@ public class RegistrationPage extends JFrame {
                         // identical, display error
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String value1 = passwordText.getText();
-				String value2 = repeatPasswordText.getText();
+				String value1 = SecurityUtil.sanitize(passwordText.getText());
+				String value2 = SecurityUtil.sanitize(repeatPasswordText.getText());
 				if (!value1.equals(value2)) {
 					// Invalid input.
 					JOptionPane.showMessageDialog(panel, "Invalid information",
