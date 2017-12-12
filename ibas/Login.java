@@ -90,7 +90,19 @@ class Login extends JFrame implements ActionListener {
 		 * Username:abc Password:abc Because no connection to database or any
 		 * files. so this is just a static application.
 		 */
-		if (value1.equals("abc") && value2.equals("abc")) {
+                
+                boolean correctLogin = false;
+                        correctLogin = DatabaseUtil.checkCredentials(value1, value2);
+                System.out.println(correctLogin);
+                
+                if (correctLogin == true) {
+			MainPage page = new MainPage();
+			page.setSize(900, 500);
+			page.setVisible(true);
+			panel.setVisible(false);
+		}
+                
+                else if (value1.equals("abc") && value2.equals("abc")) {
 			MainPage page = new MainPage();
 			page.setSize(900, 500);
 			page.setVisible(true);
@@ -135,12 +147,22 @@ class LoginDemo {
                             //(user_id, first_name, last_name)                            
                             //statement.executeUpdate("INSERT INTO account " + "VALUES (1, 'Nick', 'McGoogan')");  //(user_id, first_name, last_name)                         
                             //account_details = details_id, username, password, user_id
-                            //statement.executeUpdate("INSERT INTO account_details " + "VALUES (1, 'nick', 'nick', 1)");
+                            //statement.executeUpdate("INSERT INTO account_details " + "(details_id, username, password, user_id) " + "VALUES (3, 'nmcgoogan', 'ab', 1)");
+                            //DatabaseUtil.populateDatabase();
                             
                             
                             while (myRs.next()){
                                 System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name"));
                             }
+                            
+                            Statement myStmt2 = myConn.createStatement();
+                            ResultSet myRs2 = myStmt2.executeQuery("SELECT * FROM account_details ");
+                            
+                            while(myRs2.next()){
+                                System.out.println(myRs2.getString("username") + " , " + myRs2.getString("password"));
+                            }
+                                 
+                            
                             System.out.println("Made it through printing");
                             
                             
