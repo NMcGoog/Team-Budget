@@ -12,6 +12,7 @@ options appear. JFrame components are used for login and sign up options.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.*;
 
 
 class Login extends JFrame implements ActionListener {
@@ -112,6 +113,42 @@ class LoginDemo {
 			frame.setSize(900, 500);
 			frame.setVisible(true);
                         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
+                        try {
+                            
+                            System.out.println("Made it to myConn");
+                            //Connect to the DB
+                            //Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ibas?zeroDateTimeBehavior=convertToNull","root","Bean1225");
+                            
+                            Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+                            
+                            System.out.println("Connection established");
+                            
+                            //create a statement
+                            Statement myStmt = myConn.createStatement();
+                            //Execute SQL query
+                            ResultSet myRs = myStmt.executeQuery("select * from account");
+                            // Process the result set
+                            
+                            // create a Statement from the connection
+                            Statement statement = myConn.createStatement();
+                            // insert the data
+                            //(user_id, first_name, last_name)                            
+                            //statement.executeUpdate("INSERT INTO account " + "VALUES (1, 'Nick', 'McGoogan')");  //(user_id, first_name, last_name)                         
+                            //account_details = details_id, username, password, user_id
+                            //statement.executeUpdate("INSERT INTO account_details " + "VALUES (1, 'nick', 'nick', 1)");
+                            
+                            
+                            while (myRs.next()){
+                                System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name"));
+                            }
+                            System.out.println("Made it through printing");
+                            
+                            
+                        }
+                        
+                        catch (Exception exc) {
+                            exc.printStackTrace();
+                        }
                         
 			
 		} catch (Exception e) {
