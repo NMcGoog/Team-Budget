@@ -7,6 +7,7 @@ package ibas;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -21,8 +22,14 @@ public class DatabaseUtil {
     {
         try{
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
-        Statement myStmt = myConn.createStatement();
-        ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+        //Statement myStmt = myConn.createStatement();
+        
+        String passwordQuerySql = "select * from account_details where username = '"+username+"' and password = '"+password+"'";
+        
+        PreparedStatement passwordPreparedStatement = myConn.prepareStatement(passwordQuerySql);
+        
+        ResultSet myRs = passwordPreparedStatement.executeQuery(passwordQuerySql);
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
 
         if(myRs.first())
         {

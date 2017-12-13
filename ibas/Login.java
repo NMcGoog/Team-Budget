@@ -85,15 +85,15 @@ class Login extends JFrame implements ActionListener {
         */
         @Override
 	public void actionPerformed(ActionEvent ae) {
-		String value1 = SecurityUtil.sanitize(usernameText.getText());
-		String value2 = SecurityUtil.sanitize(passwordText.getText());
+		String username = SecurityUtil.sanitize(usernameText.getText());
+		String password = SecurityUtil.sanitize(passwordText.getText());
 		/**
 		 * Username:abc Password:abc Because no connection to database or any
 		 * files. so this is just a static application.
 		 */
                 
                 boolean correctLogin = false;
-                        correctLogin = DatabaseUtil.checkCredentials(value1, value2);
+                        correctLogin = DatabaseUtil.checkCredentials(username, password);
                 System.out.println(correctLogin);
                 
                 if (correctLogin == true) {
@@ -103,7 +103,7 @@ class Login extends JFrame implements ActionListener {
 			panel.setVisible(false);
 		}
                 
-                else if (value1.equals("abc") && value2.equals("abc")) {
+                else if (username.equals("abc") && password.equals("abc")) {
 			MainPage page = new MainPage();
 			page.setSize(900, 500);
 			page.setVisible(true);
