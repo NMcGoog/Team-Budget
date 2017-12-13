@@ -33,7 +33,7 @@ public class DatabaseUtil {
 
         if(myRs.first())
         {
-            return true;
+        return true;
         } else {
         return false;
         }
@@ -42,5 +42,52 @@ public class DatabaseUtil {
             exc.printStackTrace();
         }
     return false;
+    }
+    
+    //public static void updateBalance(int bal_id, int user_id, double available_balance, double transaction)
+    public static void updateBalance(int bal_id, double new_balance)    
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        
+        //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
+        String updateBalanceSQL = "update balance set available_balance = '"+new_balance+"' where bal_id = '"+bal_id+"' ";
+        
+        PreparedStatement balanceUpdatePreparedStatement = myConn.prepareStatement(updateBalanceSQL);
+        
+        balanceUpdatePreparedStatement.executeUpdate(updateBalanceSQL);
+
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    
+    public static double getBalance(int bal_id)
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        
+        String getBalanceSQL = "SELECT * FROM balance where bal_id = '"+bal_id+"'";
+        
+        PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getBalanceSQL);
+        
+        ResultSet myRs = getBalancePreparedStatement.executeQuery(getBalanceSQL);
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+      
+        
+        //System.out.println("THIS IS IN GET BALANCE" + myRs.getDouble("available_balance"));
+        //return Double.parseDouble(myRs.getString("available_balance"));
+        //String output = myRs.getString("available_balance");
+            while(myRs.next()){
+                return myRs.getDouble("available_balance");
+            }             
+        }
+        
+        catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return 0;
     }
 }

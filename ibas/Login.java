@@ -151,7 +151,16 @@ class LoginDemo {
                             //statement.executeUpdate("INSERT INTO account_details " + "(details_id, username, password, user_id) " + "VALUES (3, 'nmcgoogan', 'ab', 1)");
                             //DatabaseUtil.populateDatabase();
                             
+                            //balance = bal_id, user_id, available_balance
+                            //statement.executeUpdate("INSERT INTO balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");
+                          
                             
+                            //statement.executeUpdate("UPDATE balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");                            
+                            //String updateBalanceQuery = "update * from balance where bal_id = '"+bal_id+"' and password = '"+password+"'";
+                            //String updateBalanceQuery = "update balance where bal_id = '1' set available_balance '7000'";
+                            //int testInt = 8000;
+                            //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
+                            DatabaseUtil.updateBalance(1, 12000.75);
                             while (myRs.next()){
                                 System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name"));
                             }
@@ -162,8 +171,16 @@ class LoginDemo {
                             while(myRs2.next()){
                                 System.out.println(myRs2.getString("username") + " , " + myRs2.getString("password"));
                             }
-                                 
                             
+                            Statement myStmt3 = myConn.createStatement();
+                            ResultSet myRs3 = myStmt3.executeQuery("SELECT * FROM balance ");
+                            
+                            while(myRs3.next()){
+                                System.out.println(myRs3.getString("available_balance") + " , " + myRs3.getString("bal_id"));
+                            }                            
+                                 
+                            double testDouble = DatabaseUtil.getBalance(1);
+                            System.out.println(testDouble + " this is outputting results of getBalance");
                             System.out.println("Made it through printing");
                             
                             
