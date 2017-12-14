@@ -44,6 +44,32 @@ public class DatabaseUtil {
     return false;
     }
     
+    public static boolean checkForDuplicateUsername(String username) 
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        
+        String duplicateUsernameQuery = "select * from account_details where username = '"+username+"'";
+        
+        PreparedStatement passwordPreparedStatement = myConn.prepareStatement(duplicateUsernameQuery);
+        
+        ResultSet myRs = passwordPreparedStatement.executeQuery(duplicateUsernameQuery);
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+
+        if(myRs.first())
+        {
+        return true;
+        } else {
+        return false;
+        }
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    return false;
+    }    
+    
     //updateBalance to include 
     //public static void updateBalance(int bal_id, int user_id, double available_balance, double transaction)
     public static void updateBalance(int bal_id, double new_balance)    
@@ -159,4 +185,29 @@ public class DatabaseUtil {
 
         return null;
     }
+    public static boolean createAccount(String username) 
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        
+        String duplicateUsernameQuery = "select * from account_details where username = '"+username+"'";
+        
+        PreparedStatement passwordPreparedStatement = myConn.prepareStatement(duplicateUsernameQuery);
+        
+        ResultSet myRs = passwordPreparedStatement.executeQuery(duplicateUsernameQuery);
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+
+        if(myRs.first())
+        {
+        return true;
+        } else {
+        return false;
+        }
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    return false;
+    }      
 }

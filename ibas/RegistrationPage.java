@@ -41,6 +41,13 @@ public class RegistrationPage extends JFrame {
 		usernameLabel.setText("Username:");
 		usernameText = new JTextField(15);
 
+                JLabel firstNameLabel = new JLabel("First Name:");
+                JTextField firstNameText = new JTextField();
+                
+                JLabel lastNameLabel = new JLabel("Last Name:");
+                JTextField lastNameText = new JTextField();                
+                
+                
                 // Prompt user to enter password
 		passwordLabel = new JLabel();
 		passwordLabel.setText("Password:");
@@ -70,7 +77,11 @@ public class RegistrationPage extends JFrame {
 		SIGNUP = new JButton("Create Login");
 
                 // Initialize JPanel "panel" with 4 rows and 4 columns
-		panel = new JPanel(new GridLayout(4, 4));
+		panel = new JPanel(new GridLayout(5, 4));
+                panel.add(firstNameLabel);
+                panel.add(firstNameText);
+                panel.add(lastNameLabel);
+                panel.add(lastNameText);
 		panel.add(usernameLabel);
 		panel.add(usernameText);
 		panel.add(passwordLabel);
@@ -84,7 +95,8 @@ public class RegistrationPage extends JFrame {
 		panel.add(repeatSecurityAnswerLabel);
 		panel.add(repeatSecurityAnswerText);
 		panel.add(SIGNUP);
-
+                
+                
                 // Add action to "Create Login" button
 		SIGNUP.addActionListener(new ActionListener() {
 
@@ -92,15 +104,39 @@ public class RegistrationPage extends JFrame {
                         // identical, display error
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				String value1 = SecurityUtil.sanitize(passwordText.getText());
-				String value2 = SecurityUtil.sanitize(repeatPasswordText.getText());
-				if (!value1.equals(value2)) {
+                                               
+                                //usernameText
+				String enteredUsername = SecurityUtil.sanitize(usernameText.getText());
+                                String enteredFirstName = SecurityUtil.sanitize(firstNameText.getText());
+                                String enteredLastName = SecurityUtil.sanitize(lastNameText.getText());
+                                
+                                boolean usernameExists = DatabaseUtil.checkForDuplicateUsername(enteredUsername);
+                                if(usernameExists == true){
+					JOptionPane.showMessageDialog(panel, "Username already exists",
+							"Warning", JOptionPane.WARNING_MESSAGE);
+
+					return;                                    
+                                }
+                                String enteredPassword = SecurityUtil.sanitize(passwordText.getText());
+				String repeatPassword = SecurityUtil.sanitize(repeatPasswordText.getText());
+				if (!enteredPassword.equals(repeatPassword)) {
 					// Invalid input.
-					JOptionPane.showMessageDialog(panel, "Invalid information",
-							"Inane warning", JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(panel, "Passwords do not match",
+							"Warning", JOptionPane.WARNING_MESSAGE);
 
 					return;
 				}
+                                
+                                if(enteredUsername.equals("")||enteredPassword.equals("")||enteredFirstName.equals("")||enteredLastName.equals(""))// || enteredPassword == null)
+                                {
+					JOptionPane.showMessageDialog(panel, "All information must be provided",
+							"Warning", JOptionPane.WARNING_MESSAGE);
+
+					return;                                    
+                                }
+                                else {
+                                    System.out.println("Account Created");
+                                }
 			}
 		});
 

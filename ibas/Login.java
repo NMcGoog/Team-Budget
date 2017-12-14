@@ -172,7 +172,7 @@ class LoginDemo {
                             ResultSet myRs2 = myStmt2.executeQuery("SELECT * FROM account_details ");
                             
                             while(myRs2.next()){
-                                System.out.println(myRs2.getString("username") + " , " + myRs2.getString("password") + " , " + myRs2.getString("user_id"));
+                                System.out.println(myRs2.getString("details_id") + " " + myRs2.getString("username") + " , " + myRs2.getString("password") + " , " + myRs2.getString("user_id"));
                             }
                             
                             Statement myStmt3 = myConn.createStatement();
@@ -185,6 +185,12 @@ class LoginDemo {
                             double testDouble = DatabaseUtil.getBalanceByBalID(1);
                             System.out.println(testDouble + " this is outputting results of getBalance");
                             System.out.println("Made it through printing");
+                            
+                            Statement myStmt4 = myConn.createStatement();
+                            ResultSet myRs4 = myStmt4.executeQuery("SELECT COUNT(*) FROM account_details ");
+                            while(myRs4.next()){
+                                System.out.println(myRs4.getInt(1));
+                            }                                   
                             
                             
                         }
