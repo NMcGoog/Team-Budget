@@ -74,7 +74,7 @@ class Login extends JFrame implements ActionListener {
 				RegistrationPage page=new RegistrationPage();
 				page.setSize(900, 500);
 				page.setVisible(true);
-				panel.setVisible(false);
+				panel.setVisible(true);
 			}
 		});
 		setTitle("LOGIN FORM");
@@ -148,16 +148,18 @@ class LoginDemo {
                             // create a Statement from the connection
                             Statement statement = myConn.createStatement();
                             // insert the data
-                            //(user_id, first_name, last_name)                            
+                            //(user_id, first_name, last_name)    
                             //statement.executeUpdate("INSERT INTO account " + "VALUES (1, 'Nick', 'McGoogan')");  //(user_id, first_name, last_name)                         
                             //account_details = details_id, username, password, user_id
                             //statement.executeUpdate("INSERT INTO account_details " + "(details_id, username, password, user_id) " + "VALUES (3, 'nmcgoogan', 'ab', 1)");
+                            //account = user_id, firstname, lastname, username, password
+                            
                             //DatabaseUtil.populateDatabase();
                             
                             //balance = bal_id, user_id, available_balance
                             //statement.executeUpdate("INSERT INTO balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");
                           
-                            
+                            //String createAccountSQL = "INSERT INTO account " + "(user_id, first_name, last_name, username, password)" + "VALUES ('Raymond','Hames','lastName','"+username+"','"+password+"'";                            
                             //statement.executeUpdate("UPDATE balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");                            
                             //String updateBalanceQuery = "update * from balance where bal_id = '"+bal_id+"' and password = '"+password+"'";
                             //String updateBalanceQuery = "update balance where bal_id = '1' set available_balance '7000'";
@@ -165,7 +167,7 @@ class LoginDemo {
                             //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
                             DatabaseUtil.updateBalance(1, 12000.75);
                             while (myRs.next()){
-                                System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name"));
+                                System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name") + " , " + myRs.getString("username"));
                             }
                             
                             Statement myStmt2 = myConn.createStatement();

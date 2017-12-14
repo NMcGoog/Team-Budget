@@ -24,7 +24,8 @@ public class DatabaseUtil {
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
         //Statement myStmt = myConn.createStatement();
         
-        String passwordQuerySql = "select * from account_details where username = '"+username+"' and password = '"+password+"'";
+        //changed from account_details
+        String passwordQuerySql = "select * from account where username = '"+username+"' and password = '"+password+"'";
         
         PreparedStatement passwordPreparedStatement = myConn.prepareStatement(passwordQuerySql);
         
@@ -50,7 +51,8 @@ public class DatabaseUtil {
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
         //Statement myStmt = myConn.createStatement();
         
-        String duplicateUsernameQuery = "select * from account_details where username = '"+username+"'";
+        //changed from account_details
+        String duplicateUsernameQuery = "select * from account where username = '"+username+"'";
         
         PreparedStatement passwordPreparedStatement = myConn.prepareStatement(duplicateUsernameQuery);
         
@@ -145,7 +147,8 @@ public class DatabaseUtil {
         {
             try{
                 Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
-                String getUserIDByUsernameSQL = "SELECT * FROM account_details where username = '"+username+"'";
+                //changed from account_details
+                String getUserIDByUsernameSQL = "SELECT * FROM account where username = '"+username+"'";
 
                 PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getUserIDByUsernameSQL);
 
@@ -185,29 +188,68 @@ public class DatabaseUtil {
 
         return null;
     }
-    public static boolean createAccount(String username) 
+    public static void createAccount(int user_id, String firstName, String lastName, String username, String password) 
     {
         try{
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
         //Statement myStmt = myConn.createStatement();
+        //statement.executeUpdate("INSERT INTO account_details " + "(details_id, username, password, user_id) " + "VALUES (3, 'nmcgoogan', 'ab', 1)");
+        //account = user_id, firstname, lastname, username, password        
+        //changed from account_details
+        //String createAccountSQL = "INSERT INTO account " + "(user_id, first_name, last_name, username, password)" + "VALUES ('"+user_id+"','"+firstName+"','"+lastName+"','"+username+"','"+password+"'";
+        //String createAccountSQL = "INSERT INTO account " + "VALUES ('"+user_id+"','"+firstName+"','"+lastName+"','"+username+"','"+password+"' ";
         
-        String duplicateUsernameQuery = "select * from account_details where username = '"+username+"'";
+        //PreparedStatement createAccount = myConn.prepareStatement(createAccountSQL);
         
-        PreparedStatement passwordPreparedStatement = myConn.prepareStatement(duplicateUsernameQuery);
+        //createAccount.executeUpdate();
         
-        ResultSet myRs = passwordPreparedStatement.executeQuery(duplicateUsernameQuery);
-        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+        //Statement statement = myConn.createStatement();
+        //statement.executeUpdate("INSERT INTO account " + "(user_id, first_name, last_name, username, password)" + "VALUES (3, 'Nick', 'McGoogan', 'nmcgoo', 'cba')");  //(user_id, first_name, last_name)                         
+        String createAccountSQL = "INSERT INTO account " + "(user_id, first_name, last_name, username, password)" + "VALUES ('"+user_id+"', '"+firstName+"', '"+lastName+"', '"+username+"', '"+password+"')";
+        PreparedStatement createAccount = myConn.prepareStatement(createAccountSQL);
+        createAccount.executeUpdate(createAccountSQL);
+        
+        String createBalanceAccountSQL = "INSERT INTO balance " + "(bal_id, user_id, available_balance, checking_account, saving_account)" + "VALUES ('"+user_id+"', '"+user_id+"', 0, 0, 0)";
+        PreparedStatement createAccountBalance = myConn.prepareStatement(createBalanceAccountSQL);
+        createAccount.executeUpdate(createBalanceAccountSQL);
+        
+        
 
+        //statement.executeUpdate(createAccountSQL);
+        
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }     
+    
+    public static int getCountOfDB() 
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        //ResultSet myRs4 = myStmt4.executeQuery("SELECT COUNT(*) FROM account ");
+        
+        //changed from account_details
+        String countSQL = "SELECT COUNT(*) FROM account ";
+        
+        PreparedStatement passwordPreparedStatement = myConn.prepareStatement(countSQL);
+        
+        ResultSet myRs = passwordPreparedStatement.executeQuery(countSQL);
+        //ResultSet myRs = myStmt.executeQuery("select * from account_details where username = '"+username+"' and password = '"+password+"'");          
         if(myRs.first())
         {
-        return true;
+            return myRs.getInt(1);
         } else {
-        return false;
+        return 0;
         }
     }
     catch (Exception exc) {
             exc.printStackTrace();
         }
-    return false;
-    }      
+    return 0;
+    }         
+    
+    
 }

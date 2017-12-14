@@ -73,11 +73,13 @@ public class RegistrationPage extends JFrame {
 		repeatSecurityAnswerLabel.setText("Repeat Security Answer:");
 		repeatSecurityAnswerText = new JPasswordField(15);
 
+                JLabel blankLabel = new JLabel();
+
                 // JButton that initiates registration
 		SIGNUP = new JButton("Create Login");
 
                 // Initialize JPanel "panel" with 4 rows and 4 columns
-		panel = new JPanel(new GridLayout(5, 4));
+		panel = new JPanel(new GridLayout(3, 4));
                 panel.add(firstNameLabel);
                 panel.add(firstNameText);
                 panel.add(lastNameLabel);
@@ -88,12 +90,13 @@ public class RegistrationPage extends JFrame {
 		panel.add(passwordText);
 		panel.add(repeatPasswordLabel);
 		panel.add(repeatPasswordText);
-		panel.add(securityQuestionLabel);
-		panel.add(securityQuestionText);
-		panel.add(securityAnswerLabel);
-		panel.add(securityAnswerText);
-		panel.add(repeatSecurityAnswerLabel);
-		panel.add(repeatSecurityAnswerText);
+		//panel.add(securityQuestionLabel);
+		//panel.add(securityQuestionText);
+		//panel.add(securityAnswerLabel);
+		//panel.add(securityAnswerText);
+		//panel.add(repeatSecurityAnswerLabel);
+		//panel.add(repeatSecurityAnswerText);
+                panel.add(blankLabel);
 		panel.add(SIGNUP);
                 
                 
@@ -135,7 +138,11 @@ public class RegistrationPage extends JFrame {
 					return;                                    
                                 }
                                 else {
-                                    System.out.println("Account Created");
+                                    int count = DatabaseUtil.getCountOfDB();
+                                    System.out.println("Account Created, count is " + count );
+                                    int user_id = count + 1;
+                                    DatabaseUtil.createAccount(user_id, enteredFirstName, enteredLastName, enteredUsername, enteredPassword);
+                                    
                                 }
 			}
 		});
