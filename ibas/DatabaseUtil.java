@@ -120,28 +120,76 @@ public class DatabaseUtil {
         return 0;
     }
     
-    public static double getBalanceByUserID(int user_id)
+    public static double getBalanceByUserID(int user_id, String account)
     {
         try{
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
         //Statement myStmt = myConn.createStatement();
         
-        String getBalanceSQL = "SELECT * FROM balance where user_id = '"+user_id+"'";
+        String getBalanceSQL = "SELECT '"+account+"' FROM balance where user_id = '"+user_id+"' ";
         
         PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getBalanceSQL);
         
         ResultSet myRs = getBalancePreparedStatement.executeQuery(getBalanceSQL);
 
+        if(account.equals("saving_account"))
             while(myRs.next()){
-                return myRs.getDouble("available_balance");
-            }             
+                return myRs.getDouble("saving_account");
+            }     
+        else if(account.equals("checking_account"))
+            while(myRs.next()){
+                return myRs.getDouble("saving_account");
+            }     
         }
+        
         
         catch (Exception exc) {
             exc.printStackTrace();
         }
         return 0;
     }    
+    
+        public static double getCheckingAccountBalance(int user_id)
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        
+        String getBalanceSQL = "SELECT * FROM balance where user_id = '"+user_id+"' ";
+        
+        PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getBalanceSQL);
+        
+        ResultSet myRs = getBalancePreparedStatement.executeQuery(getBalanceSQL);
+            while(myRs.next()){
+                return myRs.getDouble("checking_account");
+            }         
+        }
+        catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return 0;
+    }  
+        
+        public static double getSavingAccountBalance(int user_id)
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        //Statement myStmt = myConn.createStatement();
+        
+        String getBalanceSQL = "SELECT * FROM balance where user_id = '"+user_id+"' ";
+        
+        PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getBalanceSQL);
+        
+        ResultSet myRs = getBalancePreparedStatement.executeQuery(getBalanceSQL);
+            while(myRs.next()){
+                return myRs.getDouble("saving_account");
+            }         
+        }
+        catch (Exception exc) {
+            exc.printStackTrace();
+        }
+        return 0;
+    }            
     
     public static int getUserIDByUsername(String username)
         {
