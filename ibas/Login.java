@@ -97,18 +97,21 @@ class Login extends JFrame implements ActionListener {
                 System.out.println(correctLogin);
                 
                 if (correctLogin == true) {
-			MainPage page = new MainPage();
+                        int userID = DatabaseUtil.getUserIDByUsername(username);
+                        //System.out.println("user_id is " + userID);
+			MainPage page = new MainPage(userID);
 			page.setSize(900, 500);
 			page.setVisible(true);
 			panel.setVisible(false);
 		}
                 
-                else if (username.equals("abc") && password.equals("abc")) {
+                /*else if (username.equals("abc") && password.equals("abc")) {
 			MainPage page = new MainPage();
 			page.setSize(900, 500);
 			page.setVisible(true);
 			panel.setVisible(false);
-		} else {
+		} */
+                else {
 			System.out.println("enter the valid username and password");
 			JOptionPane.showMessageDialog(this, "Incorrect login or password",
 					"Error", JOptionPane.ERROR_MESSAGE);
@@ -169,7 +172,7 @@ class LoginDemo {
                             ResultSet myRs2 = myStmt2.executeQuery("SELECT * FROM account_details ");
                             
                             while(myRs2.next()){
-                                System.out.println(myRs2.getString("username") + " , " + myRs2.getString("password"));
+                                System.out.println(myRs2.getString("username") + " , " + myRs2.getString("password") + " , " + myRs2.getString("user_id"));
                             }
                             
                             Statement myStmt3 = myConn.createStatement();
@@ -179,7 +182,7 @@ class LoginDemo {
                                 System.out.println(myRs3.getString("available_balance") + " , " + myRs3.getString("bal_id"));
                             }                            
                                  
-                            double testDouble = DatabaseUtil.getBalance(1);
+                            double testDouble = DatabaseUtil.getBalanceByBalID(1);
                             System.out.println(testDouble + " this is outputting results of getBalance");
                             System.out.println("Made it through printing");
                             

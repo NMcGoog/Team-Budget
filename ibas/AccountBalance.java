@@ -18,12 +18,14 @@ public class AccountBalance extends JFrame {
     
     JPanel panel;
     
-    public AccountBalance()
+    public AccountBalance(int user_id)
     {
-        panel = new JPanel (new GridLayout(4,2));
+        panel = new JPanel (new GridLayout(3,2));
         
+        String customerName = DatabaseUtil.getName(user_id);
+        double checkingBalance = DatabaseUtil.getBalanceByUserID(user_id);
         
-        JLabel helloLabel = new JLabel("Hello" + " 'GET USERNAME'");
+        JLabel helloLabel = new JLabel("Hello " + customerName);
         JLabel blankLabel = new JLabel("");
         
         JLabel checkingLabel = new JLabel("Checking Balance:");
@@ -39,6 +41,7 @@ public class AccountBalance extends JFrame {
         panel.add(savingsLabel);
         panel.add(savingsTextField);        
 
+        checkingTextField.setText(Double.toString(checkingBalance));
         
         add(panel, BorderLayout.CENTER);
         setTitle("Account Balance");

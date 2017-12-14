@@ -29,7 +29,9 @@ public class MainPage extends JFrame {
         */
 	JButton interestRateButton, accountBalanceButton, createLoginButton, directDepositButton, billPaymentButton;
 
-	public MainPage() {
+	//public MainPage(int user_id) {
+        
+	public MainPage(int user_id) {
 
                 // Initialize JPanel with 4 rows and 4 columns
 		panel = new JPanel(new GridLayout(4, 4));
@@ -76,7 +78,7 @@ public class MainPage extends JFrame {
                 accountBalanceButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        AccountBalance balancePage = new AccountBalance();
+                        AccountBalance balancePage = new AccountBalance(user_id);
 				balancePage.setSize(400, 400);
 				balancePage.setVisible(true);
 				//panel.setVisible(false);                        
