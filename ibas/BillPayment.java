@@ -20,13 +20,15 @@ public class BillPayment extends JFrame {
     // Declare JPanel "panel"
     JPanel panel;
 
-    public BillPayment()
+    public BillPayment(int user_id)
     {
         // Initialize panel to set 9 rows and 2 columns
-        panel = new JPanel (new GridLayout(9,2));
+        panel = new JPanel (new GridLayout(6,2));
 	
+        
 	// Initialize JLabel 'helloLabel" to display greeting message
-        JLabel helloLabel = new JLabel("Hello" + " 'GET USERNAME'");
+        String customerName = DatabaseUtil.getName(user_id);
+        JLabel helloLabel = new JLabel("Hello " + customerName);
         JLabel blankLabel = new JLabel("");
         
 	// Initialize JLabel "accountToPayLabel" to display
@@ -45,7 +47,8 @@ public class BillPayment extends JFrame {
         JRadioButton checkingRadioButton = new JRadioButton ("Checking Account");
         ButtonGroup accountButtonGroup = new ButtonGroup();
         accountButtonGroup.add(savingsRadioButton);
-        accountButtonGroup.add(checkingRadioButton);        
+        accountButtonGroup.add(checkingRadioButton);    
+        savingsRadioButton.setSelected(true);
         
         // Initialize JLabel for payment amount
         JLabel paymentBalanceLabel = new JLabel("Payment Amount:");
@@ -84,18 +87,67 @@ public class BillPayment extends JFrame {
         panel.add(checkingRadioButton);
         panel.add(paymentBalanceLabel);
         panel.add(paymentBalanceField);
-        panel.add(recurringTypeLabel);
-        panel.add(blankLabel3);         
-        panel.add(oneTimeRadioButton);
-        panel.add(recurringRadioButton);  
-        panel.add(recurringDateLabel);
-        panel.add(recurringDateField); 
+        //panel.add(recurringTypeLabel);
+        //panel.add(blankLabel3);         
+        //panel.add(oneTimeRadioButton);
+        //panel.add(recurringRadioButton);  
+        //panel.add(recurringDateLabel);
+        //panel.add(recurringDateField); 
         panel.add(blankLabel4);
         panel.add(submitButton);         
         
         // Add panel to frame
         add(panel, BorderLayout.CENTER);
         // Set title of panel as "Bill Payment"
-        setTitle("Bill Payment");           
+        setTitle("Bill Payment");  
+        
+        submitButton.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                String accountToPayFieldString = accountToPayField.getText();
+                String paymentBalanceFieldString = paymentBalanceField.getText();
+                
+                
+                if(accountToPayFieldString.equals("")||paymentBalanceFieldString.equals(""))
+                {
+                    JOptionPane.showMessageDialog(panel, "Please fill in all information, account and balance required",
+                                    "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;                         
+                }
+                
+                if(savingsRadioButton.isSelected()) {
+                   
+                    double currentBalance = DatabaseUtil.getSavingAccountBalance(user_id);
+                    double paymentAmount = Double.parseDouble(paymentBalanceFieldString);
+                    
+                    if(paymentAmount>currentBalance){
+                        JOptionPane.showMessageDialog(panel, "Insufficient funds, please try again with an appropriate amount",
+                                        "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;                             
+                    }
+                    
+                    double newBalance = currentBalance - paymentAmount;
+                    DatabaseUtil.updateSavingBalance(user_id, newBalance);
+                    System.out.println("Payment of $" + paymentAmount + " has been sent from your Savings Account to account " + accountToPayFieldString);
+                }
+                
+                if(checkingRadioButton.isSelected()) {
+                   
+                    double currentBalance = DatabaseUtil.getCheckingAccountBalance(user_id);
+                    double paymentAmount = Double.parseDouble(paymentBalanceFieldString);
+                    
+                    if(paymentAmount>currentBalance){
+                        JOptionPane.showMessageDialog(panel, "Insufficient funds, please try again with an appropriate amount",
+                                        "Warning", JOptionPane.WARNING_MESSAGE);
+                        return;                             
+                    }
+                    
+                    double newBalance = currentBalance - paymentAmount;
+                    DatabaseUtil.updateCheckingBalance(user_id, newBalance);
+                    System.out.println("Payment of $" + paymentAmount + " has been sent from your Checking Account to account " + accountToPayFieldString);
+                }                
+            }
+        });
     }
 }

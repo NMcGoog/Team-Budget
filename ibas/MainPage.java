@@ -117,7 +117,7 @@ public class MainPage extends JFrame {
                 billPaymentButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        BillPayment billingInfo = new BillPayment();
+                        BillPayment billingInfo = new BillPayment(user_id);
 				billingInfo.setSize(400, 400);
 				billingInfo.setVisible(true);
 				//panel.setVisible(false);                        
