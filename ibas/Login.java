@@ -94,7 +94,7 @@ class Login extends JFrame implements ActionListener {
                 
                 boolean correctLogin = false;
                         correctLogin = DatabaseUtil.checkCredentials(username, password);
-                System.out.println(correctLogin);
+                //System.out.println(correctLogin);
                 
                 if (correctLogin == true) {
                         int userID = DatabaseUtil.getUserIDByUsername(username);
