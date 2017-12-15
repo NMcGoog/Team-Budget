@@ -91,7 +91,7 @@ public class MainPage extends JFrame {
                 createLoginButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        CreateLogin updateLoginInfo = new CreateLogin();
+                        UpdateLogin updateLoginInfo = new UpdateLogin(user_id);
 				updateLoginInfo.setSize(600, 400);
 				updateLoginInfo.setVisible(true);
 				//panel.setVisible(false);                        

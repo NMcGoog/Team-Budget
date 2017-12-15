@@ -92,6 +92,24 @@ public class DatabaseUtil {
         }
     }
     
+        public static void updatePassword(int user_id, String password)    
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        
+        //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
+        String updatePasswordSQL = "update account set password = '"+password+"' where user_id = '"+user_id+"' ";
+        
+        PreparedStatement balanceUpdatePreparedStatement = myConn.prepareStatement(updatePasswordSQL);
+        
+        balanceUpdatePreparedStatement.executeUpdate(updatePasswordSQL);
+
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }
+    
     public static double getBalanceByBalID(int bal_id)
     {
         try{
@@ -236,6 +254,28 @@ public class DatabaseUtil {
 
         return null;
     }
+    
+    public static String getUsername(int user_id)
+        {
+            try{
+                Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+                String getNameSQL = "SELECT * FROM account where user_id = '"+user_id+"'";
+
+                PreparedStatement getBalancePreparedStatement = myConn.prepareStatement(getNameSQL);
+
+                ResultSet myRs = getBalancePreparedStatement.executeQuery(getNameSQL);
+ 
+                    while(myRs.next()){
+                        return myRs.getString("username");
+                    }             
+                }
+            catch (Exception exc) {
+                exc.printStackTrace();
+            }
+
+        return null;
+    }
+    
     public static void createAccount(int user_id, String firstName, String lastName, String username, String password) 
     {
         try{
@@ -298,6 +338,7 @@ public class DatabaseUtil {
         }
     return 0;
     }         
+
     
-    
+
 }
