@@ -16,6 +16,7 @@ monthly payment, interest paid over lifetime, and total amount paid.
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.text.DecimalFormat;
 
 /*
 This is the implementation of the interest rate calculator
@@ -23,6 +24,7 @@ This is the implementation of the interest rate calculator
 public class InterestRateCalculator extends JFrame {
     // Declare JPanel "panel" 
     JPanel panel;
+    DecimalFormat TwoDigitFormat = new DecimalFormat("$ #.00");
    
     public InterestRateCalculator() {
         /*
@@ -169,9 +171,9 @@ public class InterestRateCalculator extends JFrame {
             
             // Retrieve average payment, interest over lifetime, and total amount
             // for output
-            averagePaymentOutput.setText(Double.toString(averageMonthlyPayment));
-            interestOverLifetimeOutput.setText(Double.toString(amountOfTotalInterest));         
-            totalAmountOutput.setText(Double.toString(totalAmountDue));         
+            averagePaymentOutput.setText((TwoDigitFormat.format(averageMonthlyPayment)));
+            interestOverLifetimeOutput.setText(TwoDigitFormat.format(amountOfTotalInterest));         
+            totalAmountOutput.setText(TwoDigitFormat.format(totalAmountDue));         
             
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
