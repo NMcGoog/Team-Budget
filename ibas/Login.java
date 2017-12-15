@@ -131,57 +131,26 @@ class LoginDemo {
                         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
                         try {
                             
-                            System.out.println("Made it to myConn");
+                            //System.out.println("Made it to myConn");
                             //Connect to the DB
-                            //Connection myConn = DriverManager.getConnection("jdbc:mysql://localhost:3306/ibas?zeroDateTimeBehavior=convertToNull","root","Bean1225");
-                            
                             Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
-                            
-                            System.out.println("Connection established");
-                            
+                            //System.out.println("Connection established");
                             //create a statement
+                            
+                            //Account table entries
                             Statement myStmt = myConn.createStatement();
-                            //Execute SQL query
                             ResultSet myRs = myStmt.executeQuery("select * from account");
-                            // Process the result set
-                            
-                            // create a Statement from the connection
-                            Statement statement = myConn.createStatement();
-                            // insert the data
-                            //(user_id, first_name, last_name)    
-                            //statement.executeUpdate("INSERT INTO account " + "VALUES (1, 'Nick', 'McGoogan')");  //(user_id, first_name, last_name)                         
-                            //account_details = details_id, username, password, user_id
-                            //statement.executeUpdate("INSERT INTO account_details " + "(details_id, username, password, user_id) " + "VALUES (3, 'nmcgoogan', 'ab', 1)");
-                            //account = user_id, firstname, lastname, username, password
-                            
-                            //DatabaseUtil.populateDatabase();
-                            
-                            //balance = bal_id, user_id, available_balance
-                            //statement.executeUpdate("INSERT INTO balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");
-                          
-                            //String createAccountSQL = "INSERT INTO account " + "(user_id, first_name, last_name, username, password)" + "VALUES ('Raymond','Hames','lastName','"+username+"','"+password+"'";                            
-                            //statement.executeUpdate("UPDATE balance " + "(bal_id, user_id, available_balance) " + "VALUES (1, 1, 10000)");                            
-                            //String updateBalanceQuery = "update * from balance where bal_id = '"+bal_id+"' and password = '"+password+"'";
-                            //String updateBalanceQuery = "update balance where bal_id = '1' set available_balance '7000'";
-                            //int testInt = 8000;
-                            //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
-                            //DatabaseUtil.updateBalance(1, 12000.75);
+                            System.out.println("user_id, " + "first_name,  " + " last_name," + " username, " + " password, " );
                             while (myRs.next()){
-                                System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name") + " , " + myRs.getString("username"));
+                                System.out.println(myRs.getString("user_id")+ " , " + myRs.getString("first_name") + " , " + myRs.getString("last_name") + " , " + myRs.getString("username") + " , " + myRs.getString("password"));
                             }
                             
-                            Statement myStmt2 = myConn.createStatement();
-                            ResultSet myRs2 = myStmt2.executeQuery("SELECT * FROM account_details ");
-                            
-                            while(myRs2.next()){
-                                System.out.println(myRs2.getString("details_id") + " " + myRs2.getString("username") + " , " + myRs2.getString("password") + " , " + myRs2.getString("user_id"));
-                            }
-                            
+                            //Balance Table entries
+                            System.out.println("user_id, " + " checking_account ,  " + " saving_account ,");
                             Statement myStmt3 = myConn.createStatement();
                             ResultSet myRs3 = myStmt3.executeQuery("SELECT * FROM balance ");
-                            
                             while(myRs3.next()){
-                                System.out.println(myRs3.getString("available_balance") + " , " + myRs3.getString("bal_id"));
+                                System.out.println(myRs3.getString("user_id") + " , " + myRs3.getString("checking_account") + " , " + myRs3.getString("saving_account"));
                             }                            
                                  
                             double testDouble = DatabaseUtil.getBalanceByBalID(1);
