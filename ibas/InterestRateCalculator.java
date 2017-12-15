@@ -48,6 +48,7 @@ public class InterestRateCalculator extends JFrame {
         // JRadioButtons will allow customer to choose months or years
         JRadioButton monthDurationRadioButton = new JRadioButton("Months");
         JRadioButton yearDurationRadioButton = new JRadioButton("Years");
+        yearDurationRadioButton.setSelected(true);
         // Add buttons "Months" and "Years" to duration group
         ButtonGroup durationButtonGroup = new ButtonGroup();
         durationButtonGroup.add(monthDurationRadioButton);
