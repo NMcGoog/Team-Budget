@@ -104,7 +104,7 @@ public class MainPage extends JFrame {
                 directDepositButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        DirectDeposit depositInfo = new DirectDeposit();
+                        DirectDeposit depositInfo = new DirectDeposit(user_id);
 				depositInfo.setSize(400, 400);
 				depositInfo.setVisible(true);
 				//panel.setVisible(false);                        

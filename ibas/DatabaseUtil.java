@@ -74,13 +74,13 @@ public class DatabaseUtil {
     
     //updateBalance to include 
     //public static void updateBalance(int bal_id, int user_id, double available_balance, double transaction)
-    public static void updateBalance(int bal_id, double new_balance)    
+    public static void updateCheckingBalance(int user_id, double new_balance)    
     {
         try{
         Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
         
         //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
-        String updateBalanceSQL = "update balance set available_balance = '"+new_balance+"' where bal_id = '"+bal_id+"' ";
+        String updateBalanceSQL = "update balance set checking_account = '"+new_balance+"' where user_id = '"+user_id+"' ";
         
         PreparedStatement balanceUpdatePreparedStatement = myConn.prepareStatement(updateBalanceSQL);
         
@@ -91,6 +91,23 @@ public class DatabaseUtil {
             exc.printStackTrace();
         }
     }
+   public static void updateSavingBalance(int user_id, double new_balance)    
+    {
+        try{
+        Connection myConn = DriverManager.getConnection("jdbc:mysql://den1.mysql6.gear.host:3306/ibas?zeroDateTimeBehavior=convertToNull","ibas","Nc74Gk-!yU4c");
+        
+        //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
+        String updateBalanceSQL = "update balance set saving_account = '"+new_balance+"' where user_id = '"+user_id+"' ";
+        
+        PreparedStatement balanceUpdatePreparedStatement = myConn.prepareStatement(updateBalanceSQL);
+        
+        balanceUpdatePreparedStatement.executeUpdate(updateBalanceSQL);
+
+    }
+    catch (Exception exc) {
+            exc.printStackTrace();
+        }
+    }    
     
         public static void updatePassword(int user_id, String password)    
     {

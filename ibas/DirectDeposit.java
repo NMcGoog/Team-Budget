@@ -20,14 +20,15 @@ public class DirectDeposit extends JFrame {
     // Declare JPanel "panel"
     JPanel panel;
 
-    public DirectDeposit()
+    public DirectDeposit(int user_id)
     {
 
         // Initialize JPanel with 8 rows and 2 columns
-        panel = new JPanel (new GridLayout(8,2));
+        panel = new JPanel (new GridLayout(5,2));
 
         // Initialize JLabel to display greeting to customer
-        JLabel helloLabel = new JLabel("Hello" + " 'GET USERNAME'");
+        String customerName = DatabaseUtil.getName(user_id);
+        JLabel helloLabel = new JLabel("Hello " + customerName);
         JLabel blankLabel = new JLabel("");
         
         // JLabel prompting user to select account type
@@ -40,7 +41,8 @@ public class DirectDeposit extends JFrame {
         // Form checking and savings account buttons into button group
         ButtonGroup accountButtonGroup = new ButtonGroup();
         accountButtonGroup.add(savingsRadioButton);
-        accountButtonGroup.add(checkingRadioButton);        
+        accountButtonGroup.add(checkingRadioButton);    
+        savingsRadioButton.setSelected(true);
         
         // Prompt user to enter deposit amount
         JLabel depositBalanceLabel = new JLabel("Deposit Amount:");
@@ -75,12 +77,12 @@ public class DirectDeposit extends JFrame {
         panel.add(checkingRadioButton);
         panel.add(depositBalanceLabel);
         panel.add(depositBalanceField);
-        panel.add(recurringTypeLabel);
-        panel.add(blankLabel3);         
-        panel.add(oneTimeRadioButton);
-        panel.add(recurringRadioButton);  
-        panel.add(recurringDateLabel);
-        panel.add(recurringDateField); 
+        //panel.add(recurringTypeLabel);
+        //panel.add(blankLabel3);         
+       // panel.add(oneTimeRadioButton);
+        //panel.add(recurringRadioButton);  
+        //panel.add(recurringDateLabel);
+        //panel.add(recurringDateField); 
         panel.add(blankLabel4);
         panel.add(submitButton);         
 
@@ -88,6 +90,43 @@ public class DirectDeposit extends JFrame {
         add(panel, BorderLayout.CENTER);
         // Title of panel is "Direct Deposit"
         setTitle("Direct Deposit");    
+        
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            
+            String depositBalanceString = depositBalanceField.getText();
+            double depositBalance = Double.parseDouble(depositBalanceString);
+            
+            if(depositBalanceString.equals(""))// || enteredPassword == null)
+            {
+                    JOptionPane.showMessageDialog(panel, "No deposit amount",
+                                    "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;                                    
+            }
+                
+            if(savingsRadioButton.isSelected())
+            {
+                double currentSavingBalance = DatabaseUtil.getSavingAccountBalance(user_id);
+                double newBalance = currentSavingBalance + depositBalance;
+                DatabaseUtil.updateSavingBalance(user_id, newBalance);
+                System.out.println("Deposit has been applied to savings account");
+                
+            }
+            
+            if(checkingRadioButton.isSelected())
+            {
+                double currentCheckingBalance = DatabaseUtil.getSavingAccountBalance(user_id);
+                double newBalance = currentCheckingBalance + depositBalance;
+                DatabaseUtil.updateCheckingBalance(user_id, newBalance);           
+                System.out.println("Deposit has been applied to checking account");
+            }
+                
+
+            }
+        });{
+        
+    }
     }
 
 }

@@ -165,7 +165,7 @@ class LoginDemo {
                             //String updateBalanceQuery = "update balance where bal_id = '1' set available_balance '7000'";
                             //int testInt = 8000;
                             //statement.executeUpdate("update balance set available_balance = '"+testInt+"' where bal_id = 1 ");                            
-                            DatabaseUtil.updateBalance(1, 12000.75);
+                            //DatabaseUtil.updateBalance(1, 12000.75);
                             while (myRs.next()){
                                 System.out.println(myRs.getString("first_name") + " , " + myRs.getString("last_name") + " , " + myRs.getString("username"));
                             }
