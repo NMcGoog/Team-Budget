@@ -29,8 +29,6 @@ public class UpdateLogin extends JFrame{
         
         String username = DatabaseUtil.getUsername(user_id);
         
-        
-        
         // JLabel that will display greeting to customer
         JLabel helloLabel = new JLabel("Hello " + customerName);
         // JLabel will ask user what information to update
@@ -40,17 +38,17 @@ public class UpdateLogin extends JFrame{
         // JLabel displaying where to enter current password
         JLabel currentPasswordLabel = new JLabel("Please enter current password:");
         // JTextField where currrent password is entered
-        JTextField currentPasswordField = new JTextField();
+        JPasswordField currentPasswordField = new JPasswordField();
         
         // JLabel displaying where to enter new password
         JLabel newPasswordLabel = new JLabel("Enter New Password:");
         // JTextField where password is entered
-        JTextField newPasswordField = new JTextField();
+        JPasswordField newPasswordField = new JPasswordField();
         
         // JLabel displaying where new password is re-entered
         JLabel newRepeatPasswordLabel = new JLabel("Repeat New Password:");
         // JTextField where new password is re-entered
-        JTextField newRepeatPasswordField = new JTextField();        
+        JPasswordField newRepeatPasswordField = new JPasswordField();        
         
         // JLabel displaying where to enter new security question
         JLabel securityQuestionLabel = new JLabel("New Secuity Question:");
