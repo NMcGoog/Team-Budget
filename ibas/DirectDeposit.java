@@ -96,7 +96,7 @@ public class DirectDeposit extends JFrame {
             public void actionPerformed(ActionEvent e) {
             
             String depositBalanceString = depositBalanceField.getText();
-            double depositBalance = Double.parseDouble(depositBalanceString);
+            double depositBalance = Double.parseDouble(depositBalanceString);            
             
             if(depositBalanceString.equals(""))// || enteredPassword == null)
             {
@@ -111,12 +111,11 @@ public class DirectDeposit extends JFrame {
                 double newBalance = currentSavingBalance + depositBalance;
                 DatabaseUtil.updateSavingBalance(user_id, newBalance);
                 System.out.println("Deposit has been applied to savings account");
-                
             }
             
             if(checkingRadioButton.isSelected())
             {
-                double currentCheckingBalance = DatabaseUtil.getSavingAccountBalance(user_id);
+                double currentCheckingBalance = DatabaseUtil.getCheckingAccountBalance(user_id);
                 double newBalance = currentCheckingBalance + depositBalance;
                 DatabaseUtil.updateCheckingBalance(user_id, newBalance);           
                 System.out.println("Deposit has been applied to checking account");
