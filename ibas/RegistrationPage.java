@@ -142,7 +142,11 @@ public class RegistrationPage extends JFrame {
                                     System.out.println("Account Created, count is " + count );
                                     int user_id = count + 1;
                                     DatabaseUtil.createAccount(user_id, enteredFirstName, enteredLastName, enteredUsername, enteredPassword);
-                                    
+                                    //close(panel);
+                                    JOptionPane.showMessageDialog(panel, "Account Created Successfully, please remember to deposit money in to your new account",
+                                                                    "Success", JOptionPane.WARNING_MESSAGE);
+
+					return;     
                                 }
 			}
 		});
