@@ -144,7 +144,7 @@ public class RegistrationPage extends JFrame {
                                     DatabaseUtil.createAccount(user_id, enteredFirstName, enteredLastName, enteredUsername, enteredPassword);
                                     //close(panel);
                                     JOptionPane.showMessageDialog(panel, "Account Created Successfully, please remember to deposit money in to your new account",
-                                                                    "Success", JOptionPane.WARNING_MESSAGE);
+                                                                    "Success", JOptionPane.INFORMATION_MESSAGE);
 
 					return;     
                                 }
