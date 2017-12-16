@@ -111,6 +111,9 @@ public class DirectDeposit extends JFrame {
                 double newBalance = currentSavingBalance + depositBalance;
                 DatabaseUtil.updateSavingBalance(user_id, newBalance);
                 System.out.println("Deposit has been applied to savings account");
+                JOptionPane.showMessageDialog(panel, ("Thank you " + customerName + "." + '\n' + " $" + depositBalance + " has been deposited in your savings account" + '\n' + "Total Savings Account Balance: $" + newBalance),
+                        "Success", JOptionPane.WARNING_MESSAGE);
+                return;     
             }
             
             if(checkingRadioButton.isSelected())
