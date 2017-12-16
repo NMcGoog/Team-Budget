@@ -129,16 +129,12 @@ public class InterestRateCalculator extends JFrame {
             double durationOfLoan = Double.parseDouble(durationInput.getText());
             double interestRate = Double.parseDouble(interestRateInput.getText());
             double decimalInterestRate = interestRate/100;
-            
-            double durationMultiplier = 0;
-            // Format duration time frame
-            if(monthDurationRadioButton.isSelected()==true){durationMultiplier = 1/12;}
-            else if(yearDurationRadioButton.isSelected()==true){durationMultiplier = 1;}            
-      
-            // Display duration multiplier
-            System.out.println(durationMultiplier);
+                       
             // Initialize duration double variable "durationInYears"
-            double durationInYears = durationOfLoan*durationMultiplier;
+            double durationInYears =  0;
+            // Format duration time frame
+            if(monthDurationRadioButton.isSelected()==true){durationInYears = durationOfLoan/12;}
+            else if(yearDurationRadioButton.isSelected()==true){durationInYears = durationOfLoan;}    
 
             // Display duration in years
             System.out.println(durationInYears);
