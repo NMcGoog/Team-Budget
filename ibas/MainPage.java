@@ -41,7 +41,7 @@ public class MainPage extends JFrame {
                 // deposit information, and bill payment information
 		interestRateButton = new JButton("Interest Rate Calculator");
 		accountBalanceButton = new JButton("Overall Account Balance");
-		createLoginButton = new JButton("Create Login");
+		createLoginButton = new JButton("Update Login");
 		directDepositButton = new JButton("Direct Deposit Information");
 		billPaymentButton = new JButton("Bill Payment Information");
 

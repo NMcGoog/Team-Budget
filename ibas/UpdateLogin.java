@@ -133,6 +133,9 @@ public class UpdateLogin extends JFrame{
                     //DatabaseUtil.createAccount(user_id, enteredFirstName, enteredLastName, enteredUsername, enteredPassword);
                     //UpdatePassword
                     DatabaseUtil.updatePassword(user_id, enteredPassword);
+                    JOptionPane.showMessageDialog(panel, (customerName + ", your password for " + username + " has successfully been updated."),
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return;                         
                 }                
                 
 
