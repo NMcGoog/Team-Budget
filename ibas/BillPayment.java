@@ -130,6 +130,9 @@ public class BillPayment extends JFrame {
                     double newBalance = currentBalance - paymentAmount;
                     DatabaseUtil.updateSavingBalance(user_id, newBalance);
                     System.out.println("Payment of $" + paymentAmount + " has been sent from your Savings Account to account " + accountToPayFieldString);
+                    JOptionPane.showMessageDialog(panel, ("Thank you " + customerName + "." + '\n' + "$" + paymentAmount + " has been withdrawn from your Savings Account and sent to " + accountToPayFieldString + '\n' + "Your new total Savings Account Balance: $" + newBalance),
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return;                           
                 }
                 
                 if(checkingRadioButton.isSelected()) {
@@ -146,6 +149,9 @@ public class BillPayment extends JFrame {
                     double newBalance = currentBalance - paymentAmount;
                     DatabaseUtil.updateCheckingBalance(user_id, newBalance);
                     System.out.println("Payment of $" + paymentAmount + " has been sent from your Checking Account to account " + accountToPayFieldString);
+                    JOptionPane.showMessageDialog(panel, ("Thank you " + customerName + "." + '\n' + "$" + paymentAmount + " has been withdrawn from your Checking Account and sent to " + accountToPayFieldString + '\n' + "Your new total Checking Account Balance: $" + newBalance),
+                            "Success", JOptionPane.INFORMATION_MESSAGE);
+                    return;                                     
                 }                
             }
         });
