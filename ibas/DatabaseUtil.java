@@ -27,6 +27,7 @@ public class DatabaseUtil {
         //changed from account_details
         String passwordQuerySql = "select * from account where username = '"+username+"' and password = '"+password+"'";
         
+        //password is case sensitive
         PreparedStatement passwordPreparedStatement = myConn.prepareStatement(passwordQuerySql);
         
         ResultSet myRs = passwordPreparedStatement.executeQuery(passwordQuerySql);
